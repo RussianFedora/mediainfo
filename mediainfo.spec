@@ -1,6 +1,6 @@
-Name:           mediainfo0
+Name:           mediainfo
 Version:        0.7.47
-Release:        1%{?dist}.R
+Release:        2%{?dist}.R
 Summary:        Supplies technical and tag information about a video or audio file (CLI)        
 
 License:        GPL
@@ -10,8 +10,8 @@ Source0:        http://downloads.sourceforge.net/mediainfo/mediainfo_%{version}.
 
 BuildRequires:  dos2unix
 BuildRequires:  gcc-c++
-BuildRequires:  libmediainfo0-devel
-BuildRequires:  libzen0-devel >= 0.4.20
+BuildRequires:  libmediainfo-devel
+BuildRequires:  libzen-devel >= 0.4.20
 BuildRequires:  pkgconfig
 BuildRequires:  wxGTK-devel
 BuildRequires:  zlib-devel
@@ -41,8 +41,8 @@ What format (container) does MediaInfo support?
 %package gui
 Summary:    Supplies technical and tag information about a video or audio file (GUI)
 Group:      Productivity/Multimedia/Other
-Requires:   libzen0 >= 0.4.20
-Requires:   libmediainfo0 >= 0.7.47
+Requires:   libzen >= 0.4.20
+Requires:   libmediainfo >= 0.7.47
 
 %description gui
 MediaInfo (Graphical User Interface).
@@ -152,5 +152,8 @@ popd
 
 
 %changelog
+* Tue Aug 09 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.47-2.R
+- Removed 0 from name
+
 * Thu Aug 05 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.47-1.R
 - Initial release
