@@ -15,6 +15,9 @@ BuildRequires:  libzen-devel >= 0.4.20
 BuildRequires:  pkgconfig
 BuildRequires:  wxGTK-devel
 BuildRequires:  zlib-devel
+BuildRequires:  libtool
+BuildRequires:  automake
+BuildRequires:  autoconf
 
 %description
 MediaInfo CLI (Command Line Interface).
