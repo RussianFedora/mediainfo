@@ -1,5 +1,5 @@
 Name:           mediainfo
-Version:        0.7.48
+Version:        0.7.49
 Release:        1%{?dist}.R
 Summary:        Supplies technical and tag information about a video or audio file (CLI)        
 
@@ -155,6 +155,9 @@ popd
 
 
 %changelog
+* Mon Sep 19 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.49-1.R
+- Update to 0.7.49
+
 * Fri Aug 19 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.48-1.R
 - Update to 0.7.48
 
