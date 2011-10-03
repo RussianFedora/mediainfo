@@ -4,7 +4,7 @@ Release:        1%{?dist}.R
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 
 License:        GPL
-Group:          Productivity/Multimedia/Other
+Group:          Applications/Multimedia
 URL:            http://mediainfo.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}_%{version}.tar.bz2
 
@@ -43,7 +43,7 @@ What format (container) does MediaInfo support?
 
 %package gui
 Summary:    Supplies technical and tag information about a video or audio file (GUI)
-Group:      Productivity/Multimedia/Other
+Group:      Applications/Multimedia
 Requires:   libzen >= 0.4.22
 Requires:   libmediainfo >= 0.7.50
 
