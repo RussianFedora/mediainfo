@@ -1,5 +1,5 @@
 Name:           mediainfo
-Version:        0.7.50
+Version:        0.7.51
 Release:        1%{?dist}.R
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 
@@ -11,7 +11,7 @@ Source0:        http://downloads.sourceforge.net/%{name}/%{name}_%{version}.tar.
 BuildRequires:  dos2unix
 BuildRequires:  gcc-c++
 BuildRequires:  libmediainfo-devel >= %{version}
-BuildRequires:  libzen-devel >= 0.4.22
+BuildRequires:  libzen-devel >= 0.4.23
 BuildRequires:  pkgconfig
 BuildRequires:  wxGTK-devel
 BuildRequires:  zlib-devel
@@ -155,6 +155,9 @@ popd
 
 
 %changelog
+* Mon Nov 14 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.51-1.R
+- Update to 0.7.51
+
 * Tue Sep 27 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.50-1.R
 - Update to 0.7.50
 
