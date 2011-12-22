@@ -1,6 +1,6 @@
 Name:           mediainfo
-Version:        0.7.51
-Release:        2%{?dist}.R
+Version:        0.7.52
+Release:        1%{?dist}.R
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
 
@@ -8,6 +8,7 @@ License:        GPL
 Group:          Applications/Multimedia
 URL:            http://mediainfo.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}_%{version}.tar.bz2
+Source100:      README.RFRemix
 
 BuildRequires:  dos2unix
 BuildRequires:  gcc-c++
@@ -142,6 +143,8 @@ pushd Project/GNU/GUI
     %__make %{?jobs:-j%{jobs}}
 popd
 
+cp %{SOURCE100} .
+
 %install
 pushd Project/GNU/CLI
     %__make install-strip DESTDIR=%{buildroot}
@@ -177,6 +180,7 @@ popd
 %defattr(-,root,root,-)
 %doc Release/ReadMe_CLI_Linux.txt
 %doc License.html History_CLI.txt
+%doc README.RFRemix
 %{_bindir}/mediainfo
 
 %files gui
@@ -201,6 +205,9 @@ popd
 
 
 %changelog
+* Thu Dec 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.52-1.R
+- Update to 0.7.52
+
 * Tue Nov 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.51-2.R
 - Added description in russian language
 
