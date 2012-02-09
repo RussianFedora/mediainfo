@@ -1,5 +1,5 @@
 Name:           mediainfo
-Version:        0.7.52
+Version:        0.7.53
 Release:        1%{?dist}.R
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
@@ -13,7 +13,7 @@ Source100:      README.RFRemix
 BuildRequires:  dos2unix
 BuildRequires:  gcc-c++
 BuildRequires:  libmediainfo-devel >= %{version}
-BuildRequires:  libzen-devel >= 0.4.23
+BuildRequires:  libzen-devel >= 0.4.24
 BuildRequires:  pkgconfig
 BuildRequires:  wxGTK-devel
 BuildRequires:  zlib-devel
@@ -69,7 +69,7 @@ VOB, DVD, WMA, VMW, ASF, 3GP, 3GPP, 3GP2
 Summary:    Supplies technical and tag information about a video or audio file (GUI)
 Summary(ru):Предоставляет полную информацию о медиа файле (GUI)
 Group:      Applications/Multimedia
-Requires:   libzen >= 0.4.23
+Requires:   libzen >= 0.4.24
 Requires:   libmediainfo >= %{version}
 
 %description gui
@@ -205,6 +205,9 @@ popd
 
 
 %changelog
+* Thu Feb 09 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.53-1.R
+- Update to 0.7.53
+
 * Thu Dec 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.52-1.R
 - Update to 0.7.52
 
