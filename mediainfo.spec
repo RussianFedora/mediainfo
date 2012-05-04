@@ -1,5 +1,5 @@
 Name:           mediainfo
-Version:        0.7.56
+Version:        0.7.57
 Release:        1%{?dist}
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
@@ -205,6 +205,9 @@ popd
 
 
 %changelog
+* Fri May 04 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.57-1.R
+- Update to 0.7.57
+
 * Wed Apr 11 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.56-1.R
 - Update to 0.7.56
 
