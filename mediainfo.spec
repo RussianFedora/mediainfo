@@ -4,7 +4,7 @@ Release:        2%{?dist}
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
 
-License:        GPL
+License:        LGPLv3
 Group:          Applications/Multimedia
 URL:            http://mediainfo.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}_%{version}.tar.bz2
