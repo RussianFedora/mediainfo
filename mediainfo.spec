@@ -1,6 +1,6 @@
 Name:           mediainfo
 Version:        0.7.57
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
 
@@ -8,7 +8,6 @@ License:        GPL
 Group:          Applications/Multimedia
 URL:            http://mediainfo.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}_%{version}.tar.bz2
-Source100:      README.RFRemix
 
 BuildRequires:  dos2unix
 BuildRequires:  gcc-c++
@@ -143,7 +142,6 @@ pushd Project/GNU/GUI
     %__make %{?jobs:-j%{jobs}}
 popd
 
-cp %{SOURCE100} .
 
 %install
 pushd Project/GNU/CLI
@@ -164,14 +162,22 @@ popd
 
 # menu-entry
 %__install -dm 755 %{buildroot}/%{_datadir}/applications
-%__install -m 644 Project/GNU/GUI/mediainfo-gui.desktop \
-    %{buildroot}/%{_datadir}/applications
-%__install -dm 755 %{buildroot}/%{_datadir}/apps/konqueror/servicemenus
-%__install -m 644 Project/GNU/GUI/mediainfo-gui.kde3.desktop \
-    %{buildroot}/%{_datadir}/apps/konqueror/servicemenus/mediainfo-gui.desktop
+desktop-file-install --dir="%{buildroot}/%{_datadir}/applications" -m 644 \
+Project/GNU/GUI/mediainfo-gui.desktop
+#%__install -m 644 Project/GNU/GUI/mediainfo-gui.desktop \
+#    %{buildroot}/%{_datadir}/applications
+
+#%__install -dm 755 %{buildroot}/%{_datadir}/apps/konqueror/servicemenus
+#desktop-file-install --dir="%{buildroot}/%{_datadir}/apps/konqueror/servicemenus" -m 644 \
+#Project/GNU/GUI/mediainfo-gui.kde3.desktop
+#%__install -m 644 Project/GNU/GUI/mediainfo-gui.kde3.desktop \
+#    %{buildroot}/%{_datadir}/apps/konqueror/servicemenus/mediainfo-gui.desktop
+    
 %__install -dm 755 %{buildroot}/%{_datadir}/kde4/services/ServiceMenus/
-%__install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
-    %{buildroot}/%{_datadir}/kde4/services/ServiceMenus/mediainfo-gui.desktop
+desktop-file-install --dir="%{buildroot}/%{_datadir}/kde4/services/ServiceMenus/" -m 644 \
+Project/GNU/GUI/mediainfo-gui.kde4.desktop
+#%__install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
+#    %{buildroot}/%{_datadir}/kde4/services/ServiceMenus/mediainfo-gui.desktop
 
 %clean
 [ -d "%{buildroot}" -a "%{buildroot}" != "" ] && %__rm -rf "%{buildroot}"
@@ -180,7 +186,6 @@ popd
 %defattr(-,root,root,-)
 %doc Release/ReadMe_CLI_Linux.txt
 %doc License.html History_CLI.txt
-%doc README.RFRemix
 %{_bindir}/mediainfo
 
 %files gui
@@ -190,21 +195,14 @@ popd
 %{_bindir}/mediainfo-gui
 %{_datadir}/applications/*.desktop
 %{_datadir}/pixmaps/*.png
-%dir %{_datadir}/icons/hicolor
-%dir %{_datadir}/icons/hicolor/128x128
-%dir %{_datadir}/icons/hicolor/128x128/apps
 %{_datadir}/icons/hicolor/128x128/apps/*.png
-%dir %{_datadir}/apps
-%dir %{_datadir}/apps/konqueror
-%dir %{_datadir}/apps/konqueror/servicemenus
-%{_datadir}/apps/konqueror/servicemenus/*.desktop
-%dir %{_datadir}/kde4
-%dir %{_datadir}/kde4/services
-%dir %{_datadir}/kde4/services/ServiceMenus
 %{_datadir}/kde4/services/ServiceMenus/*.desktop
 
 
 %changelog
+* Fri May 04 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.57-2.R
+- Clean spec
+
 * Fri May 04 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.57-1.R
 - Update to 0.7.57
 
