@@ -1,5 +1,5 @@
 Name:           mediainfo
-Version:        0.7.58
+Version:        0.7.60
 Release:        1%{?dist}
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
@@ -12,7 +12,7 @@ Source0:        http://downloads.sourceforge.net/%{name}/%{name}_%{version}.tar.
 BuildRequires:  dos2unix
 BuildRequires:  gcc-c++
 BuildRequires:  libmediainfo-devel >= %{version}
-BuildRequires:  libzen-devel >= 0.4.26
+BuildRequires:  libzen-devel >= 0.4.28
 BuildRequires:  pkgconfig
 BuildRequires:  wxGTK-devel
 BuildRequires:  zlib-devel
@@ -68,7 +68,7 @@ VOB, DVD, WMA, VMW, ASF, 3GP, 3GPP, 3GP2
 Summary:    Supplies technical and tag information about a video or audio file (GUI)
 Summary(ru):Предоставляет полную информацию о медиа файле (GUI)
 Group:      Applications/Multimedia
-Requires:   libzen >= 0.4.26
+Requires:   libzen >= 0.4.28
 Requires:   libmediainfo >= %{version}
 
 %description gui
@@ -179,17 +179,13 @@ Project/GNU/GUI/mediainfo-gui.kde4.desktop
 #%__install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
 #    %{buildroot}/%{_datadir}/kde4/services/ServiceMenus/mediainfo-gui.desktop
 
-%clean
-[ -d "%{buildroot}" -a "%{buildroot}" != "" ] && %__rm -rf "%{buildroot}"
 
 %files
-%defattr(-,root,root,-)
 %doc Release/ReadMe_CLI_Linux.txt
 %doc License.html History_CLI.txt
 %{_bindir}/mediainfo
 
 %files gui
-%defattr(-,root,root,-)
 %doc Release/ReadMe_GUI_Linux.txt
 %doc License.html History_GUI.txt
 %{_bindir}/mediainfo-gui
@@ -200,6 +196,9 @@ Project/GNU/GUI/mediainfo-gui.kde4.desktop
 
 
 %changelog
+* Mon Sep 03 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.60-1.R
+- Update to 0.7.60
+
 * Tue Jun 05 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.58-1.R
 - Update to 0.7.58
 
