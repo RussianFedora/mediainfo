@@ -19,6 +19,7 @@ BuildRequires:  zlib-devel
 BuildRequires:  libtool
 BuildRequires:  automake
 BuildRequires:  autoconf
+BuildRequires:  desktop-file-utils
 
 %description
 MediaInfo CLI (Command Line Interface).
