@@ -173,9 +173,10 @@ Project/GNU/GUI/mediainfo-gui.desktop
 #Project/GNU/GUI/mediainfo-gui.kde3.desktop
 #%__install -m 644 Project/GNU/GUI/mediainfo-gui.kde3.desktop \
 #    %{buildroot}/%{_datadir}/apps/konqueror/servicemenus/mediainfo-gui.desktop
-    
+
+sed -i -e 's|Actions=mediainfo-gui|Actions=mediainfo-gui;|' "Project/GNU/GUI/mediainfo-gui.kde4.desktop";
 %__install -dm 755 %{buildroot}/%{_datadir}/kde4/services/ServiceMenus/
-desktop-file-install --dir="%{buildroot}/%{_datadir}/kde4/services/ServiceMenus/" -m 644 \
+desktop-file-install --dir="%{buildroot}%{_datadir}/kde4/services/ServiceMenus/" -m 644 \
 Project/GNU/GUI/mediainfo-gui.kde4.desktop
 #%__install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
 #    %{buildroot}/%{_datadir}/kde4/services/ServiceMenus/mediainfo-gui.desktop
