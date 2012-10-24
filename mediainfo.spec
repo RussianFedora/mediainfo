@@ -1,5 +1,5 @@
 Name:           mediainfo
-Version:        0.7.60
+Version:        0.7.61
 Release:        1%{?dist}
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
@@ -165,18 +165,7 @@ popd
 %__install -dm 755 %{buildroot}/%{_datadir}/applications
 desktop-file-install --dir="%{buildroot}/%{_datadir}/applications" -m 644 \
 Project/GNU/GUI/mediainfo-gui.desktop
-#%__install -m 644 Project/GNU/GUI/mediainfo-gui.desktop \
-#    %{buildroot}/%{_datadir}/applications
-
-#%__install -dm 755 %{buildroot}/%{_datadir}/apps/konqueror/servicemenus
-#desktop-file-install --dir="%{buildroot}/%{_datadir}/apps/konqueror/servicemenus" -m 644 \
-#Project/GNU/GUI/mediainfo-gui.kde3.desktop
-#%__install -m 644 Project/GNU/GUI/mediainfo-gui.kde3.desktop \
-#    %{buildroot}/%{_datadir}/apps/konqueror/servicemenus/mediainfo-gui.desktop
-
 %__install -dm 755 %{buildroot}/%{_datadir}/kde4/services/ServiceMenus/
-#desktop-file-install --dir="%{buildroot}%{_datadir}/kde4/services/ServiceMenus/" -m 644 \
-#Project/GNU/GUI/mediainfo-gui.desktop
 %__install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
     %{buildroot}/%{_datadir}/kde4/services/ServiceMenus/mediainfo-gui.desktop
 
@@ -197,6 +186,9 @@ Project/GNU/GUI/mediainfo-gui.desktop
 
 
 %changelog
+* Tue Oct 23 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.61-1.R
+- Update to 0.7.61
+
 * Mon Sep 03 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.60-1.R
 - Update to 0.7.60
 
