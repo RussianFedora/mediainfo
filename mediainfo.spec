@@ -1,6 +1,6 @@
 Name:           mediainfo
 Version:        0.7.62
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
 
@@ -9,8 +9,6 @@ Group:          Applications/Multimedia
 URL:            http://mediainfo.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}_%{version}.tar.bz2
 
-BuildRequires:  dos2unix
-BuildRequires:  gcc-c++
 BuildRequires:  libmediainfo-devel >= %{version}
 BuildRequires:  libzen-devel >= 0.4.28
 BuildRequires:  pkgconfig
@@ -118,66 +116,68 @@ VOB, DVD, WMA, VMW, ASF, 3GP, 3GPP, 3GP2
 
 %prep
 %setup -q -n MediaInfo
-dos2unix     *.html *.txt Release/*.txt
-%__chmod 644 *.html *.txt Release/*.txt
+sed -i 's/.$//' *.txt *.html Release/*.txt
+
+find Source -type f -exec chmod 644 {} ';'
+chmod 644 *.html *.txt Release/*.txt
+
+pushd Project/GNU/CLI
+    autoreconf -i
+popd
+
+pushd Project/GNU/GUI
+    autoreconf -i
+popd
 
 %build
-export CFLAGS="$RPM_OPT_FLAGS"
-export CXXFLAGS="$RPM_OPT_FLAGS"
+export CFLAGS="%{optflags}"
+export CXXFLAGS="%{optflags}"
 
 # build CLI
 pushd Project/GNU/CLI
-    %__chmod +x autogen
-    ./autogen
     %configure
-
-    %__make %{?jobs:-j%{jobs}}
+    make %{?_smp_mflags}
 popd
 
 # now build GUI
 pushd Project/GNU/GUI
-    %__chmod +x autogen
-    ./autogen
     %configure
-
-    %__make %{?jobs:-j%{jobs}}
+    make %{?_smp_mflags}
 popd
 
 
 %install
 pushd Project/GNU/CLI
-    %__make install-strip DESTDIR=%{buildroot}
+    make install DESTDIR=%{buildroot}
 popd
 
 pushd Project/GNU/GUI
-    %__make install-strip DESTDIR=%{buildroot}
+    make install DESTDIR=%{buildroot}
 popd
 
 # icon
-%__install -dm 755 %{buildroot}%{_datadir}/icons/hicolor/128x128/apps
-%__install -m 644 Source/Resource/Image/MediaInfo.png \
+install -dm 755 %{buildroot}%{_datadir}/icons/hicolor/128x128/apps
+install -m 644 Source/Resource/Image/MediaInfo.png \
     %{buildroot}%{_datadir}/icons/hicolor/128x128/apps/%{name}.png
-%__install -dm 755 %{buildroot}%{_datadir}/pixmaps
-%__install -m 644 Source/Resource/Image/MediaInfo.png \
+install -dm 755 %{buildroot}%{_datadir}/pixmaps
+install -m 644 Source/Resource/Image/MediaInfo.png \
     %{buildroot}%{_datadir}/pixmaps/%{name}.png
 
 # menu-entry
-%__install -dm 755 %{buildroot}/%{_datadir}/applications
-desktop-file-install --dir="%{buildroot}/%{_datadir}/applications" -m 644 \
+install -dm 755 %{buildroot}%{_datadir}/applications
+desktop-file-install --dir="%{buildroot}%{_datadir}/applications" -m 644 \
 Project/GNU/GUI/mediainfo-gui.desktop
-%__install -dm 755 %{buildroot}/%{_datadir}/kde4/services/ServiceMenus/
-%__install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
-    %{buildroot}/%{_datadir}/kde4/services/ServiceMenus/mediainfo-gui.desktop
+install -dm 755 %{buildroot}%{_datadir}/kde4/services/ServiceMenus/
+install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
+    %{buildroot}%{_datadir}/kde4/services/ServiceMenus/mediainfo-gui.desktop
 
 
 %files
-%doc Release/ReadMe_CLI_Linux.txt
-%doc License.html History_CLI.txt
+%doc Release/ReadMe_CLI_Linux.txt License.html History_CLI.txt
 %{_bindir}/mediainfo
 
 %files gui
-%doc Release/ReadMe_GUI_Linux.txt
-%doc License.html History_GUI.txt
+%doc Release/ReadMe_GUI_Linux.txt License.html History_GUI.txt
 %{_bindir}/mediainfo-gui
 %{_datadir}/applications/*.desktop
 %{_datadir}/pixmaps/*.png
@@ -186,53 +186,58 @@ Project/GNU/GUI/mediainfo-gui.desktop
 
 
 %changelog
-* Wed Mar 20 2013 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.62-1.R
+* Tue Apr 23 2013 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.62-2
+- Removed dos2unix from BR
+- Correcting encoding for all files
+- Corrected config and build
+
+* Wed Mar 20 2013 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.62-1
 - update to 0.7.62
 
-* Tue Oct 23 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.61-1.R
+* Tue Oct 23 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.61-1
 - Update to 0.7.61
 
-* Mon Sep 03 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.60-1.R
+* Mon Sep 03 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.60-1
 - Update to 0.7.60
 
-* Tue Jun 05 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.58-1.R
+* Tue Jun 05 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.58-1
 - Update to 0.7.58
 
-* Fri May 04 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.57-2.R
+* Fri May 04 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.57-2
 - Clean spec
 
-* Fri May 04 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.57-1.R
+* Fri May 04 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.57-1
 - Update to 0.7.57
 
-* Wed Apr 11 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.56-1.R
+* Wed Apr 11 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.56-1
 - Update to 0.7.56
 
-* Tue Mar 20 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.54-1.R
+* Tue Mar 20 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.54-1
 - Update to 0.7.54
 
-* Thu Feb 09 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.53-1.R
+* Thu Feb 09 2012 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.53-1
 - Update to 0.7.53
 
-* Thu Dec 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.52-1.R
+* Thu Dec 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.52-1
 - Update to 0.7.52
 
-* Tue Nov 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.51-2.R
+* Tue Nov 22 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.51-2
 - Added description in russian language
 
-* Mon Nov 14 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.51-1.R
+* Mon Nov 14 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.51-1
 - Update to 0.7.51
 
-* Tue Sep 27 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.50-1.R
+* Tue Sep 27 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.50-1
 - Update to 0.7.50
 
-* Mon Sep 19 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.49-1.R
+* Mon Sep 19 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.49-1
 - Update to 0.7.49
 
-* Fri Aug 19 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.48-1.R
+* Fri Aug 19 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.48-1
 - Update to 0.7.48
 
-* Tue Aug 09 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.47-2.R
+* Tue Aug 09 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.47-2
 - Removed 0 from name
 
-* Thu Aug 05 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.47-1.R
+* Thu Aug 05 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.47-1
 - Initial release
