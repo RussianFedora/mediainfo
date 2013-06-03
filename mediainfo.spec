@@ -1,6 +1,6 @@
 Name:           mediainfo
-Version:        0.7.62
-Release:        2%{?dist}
+Version:        0.7.63
+Release:        1%{?dist}
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
 
@@ -10,7 +10,7 @@ URL:            http://mediainfo.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}_%{version}.tar.bz2
 
 BuildRequires:  libmediainfo-devel >= %{version}
-BuildRequires:  libzen-devel >= 0.4.28
+BuildRequires:  libzen-devel >= 0.4.29
 BuildRequires:  pkgconfig
 BuildRequires:  wxGTK-devel
 BuildRequires:  zlib-devel
@@ -67,7 +67,7 @@ VOB, DVD, WMA, VMW, ASF, 3GP, 3GPP, 3GP2
 Summary:    Supplies technical and tag information about a video or audio file (GUI)
 Summary(ru):Предоставляет полную информацию о медиа файле (GUI)
 Group:      Applications/Multimedia
-Requires:   libzen >= 0.4.28
+Requires:   libzen >= 0.4.29
 Requires:   libmediainfo >= %{version}
 
 %description gui
@@ -186,6 +186,9 @@ install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
 
 
 %changelog
+* Fri May 31 2013 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.63-1
+- update to 0.7.63
+
 * Tue Apr 23 2013 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.62-2
 - Removed dos2unix from BR
 - Correcting encoding for all files
