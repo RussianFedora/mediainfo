@@ -1,5 +1,5 @@
 Name:           mediainfo
-Version:        0.7.63
+Version:        0.7.64
 Release:        1%{?dist}
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
@@ -186,6 +186,9 @@ install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
 
 
 %changelog
+* Fri Jul 12 2013 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.64-1
+- update to 0.7.64
+
 * Fri May 31 2013 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.63-1
 - update to 0.7.63
 
