@@ -1,6 +1,6 @@
 Name:           mediainfo
 Version:        0.7.64
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
 
@@ -130,9 +130,6 @@ pushd Project/GNU/GUI
 popd
 
 %build
-export CFLAGS="%{optflags}"
-export CXXFLAGS="%{optflags}"
-
 # build CLI
 pushd Project/GNU/CLI
     %configure
@@ -148,11 +145,11 @@ popd
 
 %install
 pushd Project/GNU/CLI
-    make install DESTDIR=%{buildroot}
+    %make_install
 popd
 
 pushd Project/GNU/GUI
-    make install DESTDIR=%{buildroot}
+    %make_install
 popd
 
 # icon
@@ -186,6 +183,9 @@ install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
 
 
 %changelog
+* Wed Jul 31 2013 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.64-3
+- Corrected make flags and use install macros
+
 * Tue Jul 30 2013 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.64-2
 - just rebuild
 
