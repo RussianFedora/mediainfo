@@ -1,5 +1,5 @@
 Name:           mediainfo
-Version:        0.7.65
+Version:        0.7.67
 Release:        1%{?dist}
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
@@ -154,10 +154,10 @@ popd
 
 # icon
 install -dm 755 %{buildroot}%{_datadir}/icons/hicolor/128x128/apps
-install -m 644 Source/Resource/Image/MediaInfo.png \
+install -m 644 -p Source/Resource/Image/MediaInfo.png \
     %{buildroot}%{_datadir}/icons/hicolor/128x128/apps/%{name}.png
 install -dm 755 %{buildroot}%{_datadir}/pixmaps
-install -m 644 Source/Resource/Image/MediaInfo.png \
+install -m 644 -p Source/Resource/Image/MediaInfo.png \
     %{buildroot}%{_datadir}/pixmaps/%{name}.png
 
 # menu-entry
@@ -165,7 +165,7 @@ install -dm 755 %{buildroot}%{_datadir}/applications
 desktop-file-install --dir="%{buildroot}%{_datadir}/applications" -m 644 \
 Project/GNU/GUI/mediainfo-gui.desktop
 install -dm 755 %{buildroot}%{_datadir}/kde4/services/ServiceMenus/
-install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
+install -m 644 -p Project/GNU/GUI/mediainfo-gui.kde4.desktop \
     %{buildroot}%{_datadir}/kde4/services/ServiceMenus/mediainfo-gui.desktop
 
 
@@ -183,6 +183,9 @@ install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
 
 
 %changelog
+* Fri Feb 21 2014 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.67-1
+- Update to 0.7.67
+
 * Thu Dec 12 2013 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.65-1
 - Update to 0.7.65
 
@@ -251,5 +254,5 @@ install -m 644 Project/GNU/GUI/mediainfo-gui.kde4.desktop \
 * Tue Aug 09 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.47-2
 - Removed 0 from name
 
-* Thu Aug 05 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.47-1
+* Fri Aug 05 2011 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.47-1
 - Initial release
