@@ -1,13 +1,13 @@
 Name:           mediainfo
 Version:        0.7.67
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
 
 License:        BSD
 Group:          Applications/Multimedia
-URL:            http://mediainfo.sourceforge.net/
-Source0:        http://downloads.sourceforge.net/%{name}/%{name}_%{version}.tar.bz2
+URL:            http://mediaarea.net/MediaInfo
+Source0:        http://mediaarea.net/download/source/%{name}/%{version}/%{name}_%{version}.tar.bz2
 
 BuildRequires:  libmediainfo-devel >= %{version}
 BuildRequires:  libzen-devel >= 0.4.29
@@ -67,8 +67,8 @@ VOB, DVD, WMA, VMW, ASF, 3GP, 3GPP, 3GP2
 Summary:    Supplies technical and tag information about a video or audio file (GUI)
 Summary(ru):Предоставляет полную информацию о медиа файле (GUI)
 Group:      Applications/Multimedia
-Requires:   libzen >= 0.4.29
-Requires:   libmediainfo >= %{version}
+Requires:   libzen%{?_isa} >= 0.4.29
+Requires:   libmediainfo%{?_isa} >= %{version}
 
 %description gui
 MediaInfo (Graphical User Interface).
@@ -121,12 +121,15 @@ sed -i 's/.$//' *.txt *.html Release/*.txt
 find Source -type f -exec chmod 644 {} ';'
 chmod 644 *.html *.txt Release/*.txt
 
+#https://fedorahosted.org/FedoraReview/wiki/AutoTools
+sed -i 's/AC_PROG_LIBTOOL/LT_INIT/' Project/GNU/*/configure.ac
+
 pushd Project/GNU/CLI
-    autoreconf -i
+    autoreconf -fiv
 popd
 
 pushd Project/GNU/GUI
-    autoreconf -i
+    autoreconf -fiv
 popd
 
 %build
@@ -183,6 +186,10 @@ install -m 644 -p Project/GNU/GUI/mediainfo-gui.kde4.desktop \
 
 
 %changelog
+* Mon Feb 24 2014 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.67-2
+- Corrected obsolete m4 macros
+- Corrected URL
+
 * Fri Feb 21 2014 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.67-1
 - Update to 0.7.67
 
