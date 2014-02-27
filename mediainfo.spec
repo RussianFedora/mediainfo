@@ -1,6 +1,6 @@
 Name:           mediainfo
 Version:        0.7.67
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 Summary(ru):    Предоставляет полную информацию о медиа файле (CLI)
 
@@ -18,6 +18,7 @@ BuildRequires:  libtool
 BuildRequires:  automake
 BuildRequires:  autoconf
 BuildRequires:  desktop-file-utils
+BuildRequires:  ImageMagick
 
 %description
 MediaInfo CLI (Command Line Interface).
@@ -159,18 +160,37 @@ popd
 install -dm 755 %{buildroot}%{_datadir}/icons/hicolor/128x128/apps
 install -m 644 -p Source/Resource/Image/MediaInfo.png \
     %{buildroot}%{_datadir}/icons/hicolor/128x128/apps/%{name}.png
+
+for size in 96x96 72x72 64x64 48x48 32x32 24x24 22x22 16x16 ; do
+    install -pdm755 \
+        %{buildroot}%{_datadir}/icons/hicolor/${size}/apps
+    convert -resize ${size} Source/Resource/Image/MediaInfo.png \
+        %{buildroot}%{_datadir}/icons/hicolor/${size}/apps/%{name}.png
+done
+
 install -dm 755 %{buildroot}%{_datadir}/pixmaps
 install -m 644 -p Source/Resource/Image/MediaInfo.png \
     %{buildroot}%{_datadir}/pixmaps/%{name}.png
 
 # menu-entry
 install -dm 755 %{buildroot}%{_datadir}/applications
-desktop-file-install --dir="%{buildroot}%{_datadir}/applications" -m 644 \
+desktop-file-install --dir="%{buildroot}%{_datadir}/applications" \
 Project/GNU/GUI/mediainfo-gui.desktop
 install -dm 755 %{buildroot}%{_datadir}/kde4/services/ServiceMenus/
 install -m 644 -p Project/GNU/GUI/mediainfo-gui.kde4.desktop \
     %{buildroot}%{_datadir}/kde4/services/ServiceMenus/mediainfo-gui.desktop
 
+%post gui
+/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
+
+%postun gui
+if [ $1 -eq 0 ] ; then
+    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+fi
+
+%posttrans gui
+/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
 %doc Release/ReadMe_CLI_Linux.txt License.html History_CLI.txt
@@ -181,11 +201,14 @@ install -m 644 -p Project/GNU/GUI/mediainfo-gui.kde4.desktop \
 %{_bindir}/mediainfo-gui
 %{_datadir}/applications/*.desktop
 %{_datadir}/pixmaps/*.png
-%{_datadir}/icons/hicolor/128x128/apps/*.png
+%{_datadir}/icons/hicolor/*/apps/*.png
 %{_datadir}/kde4/services/ServiceMenus/*.desktop
 
 
 %changelog
+* Thu Feb 27 2014 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.67-3
+- Added resized icons and scriptlets
+
 * Mon Feb 24 2014 Vasiliy N. Glazov <vascom2@gmail.com> 0.7.67-2
 - Corrected obsolete m4 macros
 - Corrected URL
